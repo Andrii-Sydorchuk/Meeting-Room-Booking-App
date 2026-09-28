@@ -2,7 +2,9 @@ import { useAuth } from "./hooks/useAuth";
 import { AuthPage } from "./components/auth/AuthPage";
 import { Navbar } from "./components/layout/Navbar";
 import { RoomList } from "./components/rooms/RoomList";
+import { BookingList } from "./components/bookings/BookingList";
 import { RoomProvider } from "./context/RoomContext";
+import { BookingProvider } from "./context/BookingContext";
 import { Loader2 } from "lucide-react";
 
 export function App() {
@@ -25,17 +27,22 @@ export function App() {
     return <AuthPage />;
   }
 
-  // 3. If user is logged in, render main layout wrapped in RoomProvider
+  // 3. If user is logged in, render main dashboard layout
   return (
     <RoomProvider>
-      <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
-        <Navbar />
+      <BookingProvider>
+        <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
+          <Navbar />
 
-        <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
-          {/* Room Management Section */}
-          <RoomList />
-        </main>
-      </div>
+          <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
+            {/* Room Management Grid */}
+            <RoomList />
+
+            {/* Selected Room Booking Schedule */}
+            <BookingList />
+          </main>
+        </div>
+      </BookingProvider>
     </RoomProvider>
   );
 }
