@@ -1,13 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import { AuthPage } from "./components/auth/AuthPage";
 import { AuthProvider } from "./context/AuthContext";
+import App from "./App";
+import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
-      <AuthPage />
+      <App />
     </AuthProvider>
   </StrictMode>,
 );
